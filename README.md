@@ -6,25 +6,20 @@
 
 ### Задание 1
 
-`Приведите ответ в свободной форме........`
 
-1. `Заполните здесь этапы выполнения, если требуется ....`
-2. `Заполните здесь этапы выполнения, если требуется ....`
-3. `Заполните здесь этапы выполнения, если требуется ....`
-4. `Заполните здесь этапы выполнения, если требуется ....`
-5. `Заполните здесь этапы выполнения, если требуется ....`
-6. 
 
 ```
-Поле для вставки кода...
-....
-....
-....
-....
+select concat(s.first_name, ' ', s.last_name) as Staff, c2.city as City, count(c.customer_id) as Customers
+from staff s 
+join store s2 on s2.store_id = s.store_id 
+join customer c on c.store_id = s2.store_id 
+join address a on a.address_id = s2.address_id 
+join city c2 on c2.city_id = a.city_id 
+group by s.first_name , s.last_name , c2.city 
+having Customers > 300
 ```
 
-`При необходимости прикрепитe сюда скриншоты
-![Название скриншота 1](ссылка на скриншот 1)`
+![task_1.png](img%2Ftask_1.png)
 
 
 ---
