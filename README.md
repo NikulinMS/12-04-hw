@@ -77,3 +77,37 @@ group by Name;
 ```
 
 ![task_4.png](img%2Ftask_4.png)
+
+---
+
+
+### Задание 5*
+
+`В базе данных все фильмы брали в аренду хотя бы 2 раза, запрос попытался 
+написать с учетом, что появится фильм, который возьмут в аренду только 1 раз, 
+тогда запрос в разделе with покажет лишний фильм.`
+
+`Просьба пояснить, верная мысль или нет?`
+
+
+```
+with 
+take as (
+select count(f.title) as Number, f.film_id as id 
+from film f 
+left join inventory i on i.film_id = f.film_id 
+left join rental r  on r.inventory_id = i.inventory_id
+group by f.film_id  
+having  Number = 1)
+
+SELECT f.title, r.rental_id 
+FROM film f
+LEFT JOIN inventory i ON i.film_id = f.film_id
+LEFT JOIN rental r ON r.inventory_id = i.inventory_id
+right join take t on t.id = f.film_id 
+WHERE t.Number = 1 and r.rental_id is null; 
+```
+
+![task_5.png](img%2Ftask_5.png)
+
+---
